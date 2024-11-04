@@ -12,7 +12,7 @@
 
 #include <string.h>
 
-void *memcpy(void *dest, const void *src, size_t n)
+void	*memcpy(void *dest, const void *src, size_t n)
 {
 	char	*de;
 	char	*sr;
@@ -21,12 +21,12 @@ void *memcpy(void *dest, const void *src, size_t n)
 	i = 0;
 	sr = (char *) src;
 	de = (char *) dest;
-	while(i < n)
+	while (i < n)
 	{
 		de[i] = sr[i];
 		i++;
 	}
-	return dest;	
+	return (dest);
 }
 /*
 #include <stdio.h>
