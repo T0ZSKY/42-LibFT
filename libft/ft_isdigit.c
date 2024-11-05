@@ -6,11 +6,11 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 11:55:06 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/04 13:34:23 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/05 15:10:08 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_isdigit(char c)
+int	ft_isdigit(int c)
 {
 	if (!(c >= 48 && c <= 57))
 		return (0);

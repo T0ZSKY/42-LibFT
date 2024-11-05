@@ -6,13 +6,13 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:14:44 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/04 14:34:29 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/05 10:55:14 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-void	bzero(void *s, size_t n)
+void	ft_bzero(void *s, size_t n)
 {
 	char	*str;
 	size_t	i;

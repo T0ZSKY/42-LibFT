@@ -6,13 +6,13 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:34:50 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/04 15:57:15 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/05 13:28:07 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
+#include "libft.h"
 
-void	*memcpy(void *dest, const void *src, size_t n)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	char	*de;
 	char	*sr;
@@ -28,6 +28,7 @@ void	*memcpy(void *dest, const void *src, size_t n)
 	}
 	return (dest);
 }
+
 /*
 #include <stdio.h>
 

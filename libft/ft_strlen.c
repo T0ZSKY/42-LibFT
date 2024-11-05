@@ -6,13 +6,15 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 13:50:40 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/04 13:52:38 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/05 14:41:18 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_strlen(char *str)
+#include "libft.h"
+
+size_t	ft_strlen(char *str)
 {
-	int	i;
+	size_t	i;
 
 	i = 0;
 	while (str[i])

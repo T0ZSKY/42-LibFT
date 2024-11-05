@@ -1,48 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:53:06 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/05 11:30:02 by tomlimon         ###   ########.fr       */
+/*   Created: 2024/11/05 13:39:43 by tomlimon          #+#    #+#             */
+/*   Updated: 2024/11/05 13:54:17 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+void	*calloc(size_t nmemb, size_t size)
 {
-	char	*str;
-	size_t	i;
+	void	*c;
+	size_t	total;
 
-	i = 0;
-	str = (char *)s;
-	while (i < n)
-	{
-		str[i] = (char)c;
-		i++;
-	}
-	return (s);
+	total = nmemb * size;
+	if (nmemb > 2147483647 / size)
+		return (NULL);
+	c = (void *)malloc(total);
+	if (!c)
+		return (NULL);
+	ft_bzero(c, nmemb);
+	return (c);
 }
-/*
-
-#include <stdio.h>
-
-int main()
-{
-    char buffer[20];
-
-    memset(buffer, '-', sizeof(buffer) - 1);
-    buffer[19] = '\0';
-
-    printf("Avant memset : %s\n", buffer);
-
-    memset(buffer, 'A', 10);
-
-    printf("Après memset : %s\n", buffer);
-
-    return 0;
-}
-*/

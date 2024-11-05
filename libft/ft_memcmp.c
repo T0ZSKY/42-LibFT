@@ -1,48 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:53:06 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/05 11:30:02 by tomlimon         ###   ########.fr       */
+/*   Created: 2024/11/05 11:36:30 by tomlimon          #+#    #+#             */
+/*   Updated: 2024/11/05 13:29:26 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
 {
-	char	*str;
-	size_t	i;
+	unsigned char	*c1;
+	unsigned char	*c2;
+	size_t			i;
 
+	c1 = (unsigned char *) s1;
+	c2 = (unsigned char *) s2;
 	i = 0;
-	str = (char *)s;
 	while (i < n)
 	{
-		str[i] = (char)c;
+		if (c1[i] != c2[i])
+			return (c1[i] - c2[i]);
 		i++;
 	}
-	return (s);
+	return (0);
 }
-/*
-
-#include <stdio.h>
-
-int main()
-{
-    char buffer[20];
-
-    memset(buffer, '-', sizeof(buffer) - 1);
-    buffer[19] = '\0';
-
-    printf("Avant memset : %s\n", buffer);
-
-    memset(buffer, 'A', 10);
-
-    printf("Après memset : %s\n", buffer);
-
-    return 0;
-}
-*/

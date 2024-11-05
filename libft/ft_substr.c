@@ -1,48 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:53:06 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/05 11:30:02 by tomlimon         ###   ########.fr       */
+/*   Created: 2024/11/05 14:15:33 by tomlimon          #+#    #+#             */
+/*   Updated: 2024/11/05 15:32:59 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memset(void *s, int c, size_t n)
+char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char	*str;
-	size_t	i;
+	unsigned int	i;
+	unsigned int	len_str;
+	char			*result;
 
 	i = 0;
-	str = (char *)s;
-	while (i < n)
+	len_str = ft_strlen((char *) s);
+	if (start >= len_str)
+		return (NULL);
+	result = malloc(sizeof (char) * (len + 1));
+	if (!result)
+		return (NULL);
+	while (i < len || result[i] != '\0')
 	{
-		str[i] = (char)c;
+		result[i] = s[start + i];
 		i++;
 	}
-	return (s);
+	result[i] = '\0';
+	return (result);
 }
-/*
-
-#include <stdio.h>
-
-int main()
-{
-    char buffer[20];
-
-    memset(buffer, '-', sizeof(buffer) - 1);
-    buffer[19] = '\0';
-
-    printf("Avant memset : %s\n", buffer);
-
-    memset(buffer, 'A', 10);
-
-    printf("Après memset : %s\n", buffer);
-
-    return 0;
-}
-*/

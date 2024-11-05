@@ -1,48 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memset.c                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/04 13:53:06 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/05 11:30:02 by tomlimon         ###   ########.fr       */
+/*   Created: 2024/11/05 13:30:17 by tomlimon          #+#    #+#             */
+/*   Updated: 2024/11/05 15:27:19 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-void	*ft_memset(void *s, int c, size_t n)
+int	ft_atoi(const char *str)
 {
-	char	*str;
-	size_t	i;
-
+	int	i;
+	int	sign;
+	int	result;
+	
+	if (!str)
+		return (0);
+	sign = 1;
 	i = 0;
-	str = (char *)s;
-	while (i < n)
+	result = 0;
+	while (str[i] == '\t' || str[i] == '\n' || str[i] == '\v' || str[i] == '\f'
+		|| str[i] == '\r' || str[i] == 32)
 	{
-		str[i] = (char)c;
 		i++;
 	}
-	return (s);
+	if (str[i] == '-')
+	{
+		sign = -1;
+		i++;
+	}
+	while (str[i] >= '0' && str[i] <= '9')
+	{
+		result = result * 10 + str[i] - '0';
+		i++;
+	}
+	return (result * sign);
 }
-/*
-
-#include <stdio.h>
-
-int main()
-{
-    char buffer[20];
-
-    memset(buffer, '-', sizeof(buffer) - 1);
-    buffer[19] = '\0';
-
-    printf("Avant memset : %s\n", buffer);
-
-    memset(buffer, 'A', 10);
-
-    printf("Après memset : %s\n", buffer);
-
-    return 0;
-}
-*/

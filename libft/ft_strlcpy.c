@@ -6,11 +6,11 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:47:33 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/04 16:52:23 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/05 10:37:12 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlcpy(char dest, char src, unsigned int size)
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
 	unsigned int	i;
 	unsigned int	len;
