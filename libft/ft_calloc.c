@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 13:39:43 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/05 13:54:17 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/05 17:20:25 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*calloc(size_t nmemb, size_t size)
+void	*ft_calloc(size_t nmemb, size_t size)
 {
 	void	*c;
 	size_t	total;
@@ -20,9 +20,9 @@ void	*calloc(size_t nmemb, size_t size)
 	total = nmemb * size;
 	if (nmemb > 2147483647 / size)
 		return (NULL);
-	c = (void *)malloc(total);
+	c = malloc(total);
 	if (!c)
 		return (NULL);
-	ft_bzero(c, nmemb);
+	ft_bzero(c, total);
 	return (c);
 }
