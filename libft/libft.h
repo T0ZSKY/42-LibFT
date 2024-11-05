@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 10:30:42 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/05 17:16:47 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/05 23:19:17 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,5 +44,8 @@ int				ft_toupper(int c);
 //--------------------------part2------------------------//
 
 char			*ft_substr(char const *s, unsigned int start, size_t len);
-
+char			*ft_strtrim(char const *s1, char const *set);
+char			**ft_split(char const *s, char c);
+char			*ft_itoa(int nb);
+char			*ft_strjoin(char const *s1, char const *s2);
 #endif
