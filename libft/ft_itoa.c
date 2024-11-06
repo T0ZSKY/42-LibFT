@@ -3,88 +3,64 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 22:56:06 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/05 23:36:57 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/06 00:52:04 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int calculate_size(int nb)
+int	count_digits(int n)
 {
-    int size;
-    int temp;
+	int	count;
 
-    size = 1;
-    temp = nb;
-    while (temp / 10 != 0)
-    {
-        size++;
-        temp = temp / 10;
-    }
-    if (nb < 0)
-    {
-        if (nb == -2147483648)
-            return (11);
-        size++;
-    }
-    return (size);
+	count = 1;
+	if (n < 0)
+		count++;
+	while (n / 10 != 0)
+	{
+		n /= 10;
+		count++;
+	}
+	return (count);
 }
 
-char *handle_negative_case(int *nb, int *neg)
+void	fill_number(char *number, int n, int len)
 {
-    char *result;
-
-    if (*nb == -2147483648)
-        return (ft_strdup("-2147483648"));
-    if (*nb < 0)
-    {
-        *neg = 1;
-        *nb = -*nb;
-        result = malloc(sizeof(char) * (calculate_size(*nb) + 1));
-        if (!result)
-            return (NULL);
-        result[0] = '-';
-    }
-    else
-    {
-        result = malloc(sizeof(char) * (calculate_size(*nb) + 1));
-        if (!result)
-            return (NULL);
-    }
-    return result;
+	if (n < 0)
+	{
+		number[0] = '-';
+		while (n != 0)
+		{
+			number[len--] = '0' - (n % 10);
+			n /= 10;
+		}
+	}
+	else
+	{
+		while (n != 0)
+		{
+			number[len--] = '0' + (n % 10);
+			n /= 10;
+		}
+	}
 }
 
-void fill_number_in_result(int nb, char *result, int size, int neg)
+char	*ft_itoa(int n)
 {
-    int i = 0;
+	int		len;
+	char	*number;
 
-    while (i < size - neg)
-    {
-        result[size - 1 - i] = nb % 10 + '0';
-        nb = nb / 10;
-        i++;
-    }
-    result[size] = '\0';
+	len = count_digits(n);
+	number = (char *)malloc(len + 1);
+	if (!number)
+		return (NULL);
+	number[len--] = '\0';
+	if (n == 0)
+		number[0] = '0';
+	else
+		fill_number(number, n, len);
+	return (number);
 }
-
-char *ft_itoa(int nb)
-{
-    int neg;
-    int size;
-    char *result;
-
-    neg = 0;
-    size = calculate_size(nb);
-    result = handle_negative_case(&nb, &neg);
-    if (!result)
-        return (NULL);
-    
-    fill_number_in_result(nb, result, size, neg);
-    
-    return (result);
-}
-
-
