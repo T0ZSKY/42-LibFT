@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 16:00:17 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/06 16:16:15 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/06 16:24:00 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,12 @@
 
 void	ft_lstadd_back(t_list **lst, t_list *new)
 {
+	t_list	*last;
 
-	while (lst)
+	last = ft_lstlast(lst);
+	last -> next = *new;
+	if (last == NULL)
 	{
-		lst = lst-> next;
+		
 	}
-	*lst = new;
 }
