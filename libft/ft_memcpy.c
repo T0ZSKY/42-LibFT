@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:34:50 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/05 13:28:07 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:04:16 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ void	*ft_memcpy(void *dest, const void *src, size_t n)
 	char	*sr;
 	size_t	i;
 
+	if (!dest && !src)
+		return (NULL);
 	i = 0;
 	sr = (char *) src;
 	de = (char *) dest;

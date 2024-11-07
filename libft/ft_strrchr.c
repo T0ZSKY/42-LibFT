@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 10:40:07 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/06 01:10:40 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:27:14 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	int	i;
+	int		i;
+	char	*b;
 
-	i = ft_strlen((char *) s);
+	i = 0;
+	b = (char *)s;
+	while (b[i])
+		i++;
 	while (i >= 0)
 	{
 		if (s[i] == (char)c)
-			return ((char *)s + i);
-		i--;
+			return (&b[i]);
+		else
+			i--;
 	}
 	return (NULL);
 }

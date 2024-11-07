@@ -6,7 +6,7 @@
 /*   By: tomlimon <tom.limon@>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 14:42:06 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/05 18:24:39 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/07 16:09:17 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	*ft_memmove(void *dest, const void *src, size_t n)
 			de[n] = sr[n];
 		}
 	}
-	else
+	else if (de < sr)
 	{
 		while (i < n)
 		{
