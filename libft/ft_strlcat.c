@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:52:36 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/05 10:54:49 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/07 18:14:24 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 	size_t	i;
 
 	dst_len = ft_strlen(dst);
-	src_len = ft_strlen((char *) src);
+	src_len = ft_strlen(src);
 	i = 0;
 	if (dstsize <= dst_len)
 	{

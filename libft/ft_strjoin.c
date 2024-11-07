@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 20:37:58 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/05 20:51:27 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/07 18:14:38 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	i = -1;
 	if (s1 && s2)
 	{
-		size1 = ft_strlen((char *) s1);
-		size2 = ft_strlen((char *) s2);
+		size1 = ft_strlen(s1);
+		size2 = ft_strlen(s2);
 		result = malloc(sizeof (char) * (size1 + size2 + 1));
 		if (!result)
 			return (NULL);

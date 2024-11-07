@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 10:30:42 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/07 15:47:41 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/07 18:11:32 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char			*ft_strchr(const char *s, int c);
 char			*ft_strdup(const char *src);
 size_t			ft_strlcat(char *dst, const char *src, size_t dstsize);
 unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);
-size_t			ft_strlen(char *str);
+size_t			ft_strlen(const char *str);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
 char			*ft_strrchr(const char *s, int c);
