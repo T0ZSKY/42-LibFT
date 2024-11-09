@@ -19,7 +19,7 @@
 
 **Title**: 42 Libft
 
-**Commits**: 11
+**Commits**: 18
 
 **Author**: tomlimon
 
