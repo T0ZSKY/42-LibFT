@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:39:23 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/12/01 16:54:30 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/11/28 23:19:54 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,7 @@ int	verif_double(t_stack *stack);
 
 //--------------------------algo------------------------//
 
-
-
-void turkey_sort(t_stack *a, t_stack *b);
-void free_split(char **split_args);
-void handle_single_argument(char *arg, t_stack **a);
+void radix_sort(t_stack *a, t_stack *b);
 
 
 
