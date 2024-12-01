@@ -5,68 +5,125 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 22:25:27 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/28 23:25:29 by tomlimon         ###   ########.fr       */
+/*   Created: 2024/12/01 16:42:21 by tomlimon          #+#    #+#             */
+/*   Updated: 2024/12/01 17:00:35 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int get_max_bits(t_stack *s)
+void find_min_max(t_stack *stack, int *min, int *max)
 {
-    int max = s->data[0];
-    for (int i = 1; i < s->size; i++)
-    {
-        if (s->data[i] > max)
-            max = s->data[i];
-    }
+    int i;
 
-    int bits = 0;
-    while (max)
+    if (stack->size == 0) // Si la pile est vide
+        return;
+
+    *min = stack->data[0];
+    *max = stack->data[0];
+    i = 1;
+    while (i < stack->size)
     {
-        bits++;
-        max >>= 1;  // Décalage à droite (divise par 2)
+        if (stack->data[i] < *min)
+            *min = stack->data[i];
+        if (stack->data[i] > *max)
+            *max = stack->data[i];
+        i++;
     }
-    return bits;
 }
 
 
-void radix_sort_pass(t_stack *a, t_stack *b, int bit_pos)
+
+// Trouve la médiane d'une pile (approximation simple)
+int find_median(t_stack *stack)
 {
-    int size = a->size;
-    int i = 0;
+    int min, max;
 
-    // Passer les éléments de A vers B en fonction du bit
-    while (i < size)
+    find_min_max(stack, &min, &max);
+    return (min + max) / 2;
+}
+
+void split_stack(t_stack *a, t_stack *b)
+{
+    int median;
+    int i;
+    int original_size;
+
+    median = find_median(a);
+    original_size = a->size;
+    i = 0;
+    while (i < original_size)
     {
-        // Vérifie si le bit à la position bit_pos est 0 ou 1
-        if (((a->data[0] >> bit_pos) & 1) == 0)
-        {
-            pb(a, b);  // Déplacer l'élément de A vers B
-        }
+        if (a->size == 0) // Si la pile a devient vide, arrête
+            break;
+        if (a->data[0] < median)
+            pb(a, b);
         else
-        {
-            ra(a);  // Rotation de A si le bit est 1
-        }
-        i++;  // Passe à l'élément suivant
+            ra(a);
+        i++;
     }
+}
 
-    // Remonter les éléments de B vers A
+
+void reinsert_sorted(t_stack *a, t_stack *b)
+{
+    int max;
+
     while (b->size > 0)
     {
-        pa(a, b);  // Pousser un élément de B vers A
+        find_min_max(b, NULL, &max);
+        while (b->size > 0 && b->data[0] != max)
+        {
+            if (b->size > 1 && b->data[1] == max)
+                sb(b);
+            else
+                rb(b);
+        }
+        if (b->size > 0) // Vérifie encore une fois avant de pousser
+            pa(a, b);
     }
 }
 
 
-
-
-void radix_sort(t_stack *a, t_stack *b)
+void bring_min_to_top(t_stack *stack)
 {
-    int bits = get_max_bits(a);  // Trouver le nombre de bits du plus grand élément
-    for (int i = 0; i < bits; i++)  // Faire un passage pour chaque bit
+    int min;
+    int pos;
+    int i;
+
+    if (stack->size == 0) // Si la pile est vide, ne rien faire
+        return;
+    find_min_max(stack, &min, NULL);
+    pos = 0;
+    i = 0;
+    while (i < stack->size)
     {
-        radix_sort_pass(a, b, i);  // Appeler la fonction de tri pour chaque bit
+        if (stack->data[i] == min)
+        {
+            pos = i;
+            break;
+        }
+        i++;
+    }
+    if (pos <= stack->size / 2)
+    {
+        while (pos-- > 0)
+            ra(stack);
+    }
+    else
+    {
+        while (pos++ < stack->size)
+            rra(stack);
     }
 }
 
+
+// Fonction principale de Turkey Sort
+void turkey_sort(t_stack *a, t_stack *b)
+{
+    if (a->size <= 1)
+        return;
+    split_stack(a, b);        // Étape 1 : Divise la pile
+    reinsert_sorted(a, b);    // Étape 2 : Réinsère les éléments triés
+    bring_min_to_top(a);      // Étape 3 : Met le plus petit en haut
+}
