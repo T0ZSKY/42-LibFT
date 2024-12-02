@@ -1,0 +1,116 @@
+#include "push_swap.h"
+
+int	find_min(t_stack *a)
+{
+	int	min;
+	int	i;
+
+	min = a->data[0];
+	i = 1;
+	while (i < a->size)
+	{
+		if (a->data[i] < min)
+			min = a->data[i];
+		i++;
+	}
+	return (min);
+}
+
+void	normalize_stack(t_stack *a, int offset)
+{
+	int	i;
+
+	i = 0;
+	while (i < a->size)
+	{
+		a->data[i] -= offset;
+		i++;
+	}
+}
+
+void	restore_stack(t_stack *a, int offset)
+{
+	int	i;
+
+	i = 0;
+	while (i < a->size)
+	{
+		a->data[i] += offset;
+		i++;
+	}
+}
+
+int	is_array_sorted(t_stack *a)
+{
+	int	i;
+
+	i = 0;
+	while (i < a->size - 1)
+	{
+		if (a->data[i] > a->data[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	sort_three_elements(t_stack *a)
+{
+	if (a->data[0] > a->data[1] && a->data[0] > a->data[2])
+		ra(a);
+	if (a->data[1] > a->data[0] && a->data[1] > a->data[2])
+		rra(a);
+	if (a->data[0] > a->data[1])
+		sa(a);
+}
+
+void	sort_four_to_five_elements(t_stack *a, t_stack *b)
+{
+	while (a->size > 3)
+	{
+		if (a->data[0] == 0 || a->data[0] == 1)
+			pb(a, b);
+		else
+			ra(a);
+	}
+	sort_three_elements(a);
+	while (b->size > 0)
+		pa(a, b);
+	if (a->data[0] > a->data[1])
+		sa(a);
+}
+
+void	radix_sort(t_stack *a, t_stack *b)
+{
+	int	bit;
+	int	size;
+	int	offset;
+	int	i;
+
+	offset = find_min(a);
+	if (offset < 0)
+		normalize_stack(a, offset);
+
+	bit = 0;
+	while (1)
+	{
+		size = a->size;
+		i = 0;
+		while (i < size)
+		{
+			if (((a->data[0] >> bit) & 1) == 0)
+				pb(a, b);
+			else
+				ra(a);
+			i++;
+		}
+		while (b->size > 0)
+			pa(a, b);
+		bit++;
+		if (is_array_sorted(a))
+			break;
+	}
+	if (offset < 0)
+		restore_stack(a, offset);
+}
+

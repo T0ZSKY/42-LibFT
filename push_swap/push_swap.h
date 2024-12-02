@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:39:23 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/11/28 23:19:54 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/12/02 01:11:39 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 
 #include <stdio.h>
 #include "./libft/libft.h"
+#include <limits.h>
+
 
 typedef struct s_stack
 {
@@ -66,6 +68,11 @@ int	verif_double(t_stack *stack);
 //--------------------------algo------------------------//
 
 void radix_sort(t_stack *a, t_stack *b);
+int	ft_is_number(char **argv);
+int ft_verif_limite(char **argv);
+void handle_single_argument(char *arg, t_stack **a);
+void free_split(char **split);
+int ft_verif_number_solo(char *argv);
 
 
 

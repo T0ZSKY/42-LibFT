@@ -1,53 +1,229 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   algo.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/02 14:21:16 by tomlimon          #+#    #+#             */
+/*   Updated: 2024/12/02 15:12:48 by tomlimon         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
-int get_max_bits(t_stack *s)
+void bring_to_top(t_stack *a, int index)
 {
-    int max = s->data[0];
-    for (int i = 1; i < s->size; i++)
+    if (index <= a->size / 2)
     {
-        if (s->data[i] > max)
-            max = s->data[i];
+        while (index > 0)
+        {
+            ra(a);
+            index--;
+        }
     }
-    int bits = 0;
-    while (max)
+    else
     {
-        bits++;
-        max >>= 1;  // Décalage à droite (divise par 2)
+        while (index < a->size)
+        {
+            rra(a);
+            index++;
+        }
     }
-    return bits;
 }
 
-void radix_sort_pass(t_stack *a, t_stack *b, int bit_pos)
+int find_index(t_stack *a, int value)
 {
-    int size = a->size;
-    int i = 0;
-    // Passer les éléments de A vers B en fonction du bit
+    int i;
+
+    i = 0;
+    while (i < a->size)
+    {
+        if (a->data[i] == value)
+            return (i);
+        i++;
+    }
+    return (-1);
+}
+
+int find_min(t_stack *a)
+{
+    int min;
+    int i;
+
+    min = a->data[0];
+    i = 1;
+    while (i < a->size)
+    {
+        if (a->data[i] < min)
+            min = a->data[i];
+        i++;
+    }
+    return (min);
+}
+
+void assign_sorted_indices(t_stack *a)
+{
+    int *sorted;
+    int i;
+    int j;
+    int temp;
+
+    i = 0;
+    sorted = malloc(sizeof(int) * a->size);
+    if (!sorted)
+        return;
+    while (i < a->size)
+    {
+        sorted[i] = a->data[i];
+        i++;
+    }
+
+    i = 0;
+    while (i < a->size - 1)
+    {
+        j = i + 1;
+        while (j < a->size)
+        {
+            if (sorted[i] > sorted[j])
+            {
+                temp = sorted[i];
+                sorted[i] = sorted[j];
+                sorted[j] = temp;
+            }
+            j++;
+        }
+        i++;
+    }
+    i = 0;
+    while (i < a->size)
+    {
+        j = 0;
+        while (j < a->size)
+        {
+            if (a->data[i] == sorted[j])
+            {
+                a->data[i] = j;
+                break;
+            }
+            j++;
+        }
+        i++;
+    }
+    free(sorted);
+}
+
+
+void normalize_stack(t_stack *a, int offset)
+{
+    int i;
+
+    i = 0;
+    while (i < a->size)
+    {
+        a->data[i] -= offset;
+        i++;
+    }
+}
+
+void restore_stack(t_stack *a, int offset)
+{
+    int i;
+
+    i = 0;
+    while (i < a->size)
+    {
+        a->data[i] += offset;
+        i++;
+    }
+}
+
+int is_array_sorted(t_stack *a)
+{
+    int i;
+
+    i = 0;
+    while (i < a->size - 1)
+    {
+        if (a->data[i] > a->data[i + 1])
+            return (0);
+        i++;
+    }
+    return (1);
+}
+
+void sort_three_elements(t_stack *a)
+{
+    if (a->data[0] > a->data[1] && a->data[0] > a->data[2])
+        ra(a);
+    if (a->data[1] > a->data[0] && a->data[1] > a->data[2])
+        rra(a);
+    if (a->data[0] > a->data[1])
+        sa(a);
+}
+
+void sort_four_to_five_elements(t_stack *a, t_stack *b)
+{
+    while (a->size > 3)
+    {
+        assign_sorted_indices(a);
+
+        int min_index = find_index(a, 0);
+        bring_to_top(a, min_index);
+        pb(a, b);
+    }
+    sort_three_elements(a);
+    while (b->size > 0)
+        pa(a, b);
+}
+
+void optimized_rotate(t_stack *a, t_stack *b, int bit)
+{
+    int i;
+    int size;
+
+    i = 0;
+    size = a->size;
     while (i < size)
     {
-        // Vérifie si le bit à la position bit_pos est 0 ou 1
-        // On utilise un masque de bit à bit_pos et on vérifie si le bit est à 0 ou à 1
-        if (((a->data[0] >> bit_pos) & 1) == 0)
-        {
-            pb(a, b);  // Déplacer l'élément de A vers B
-        }
+        if (((a->data[0] >> bit) & 1) == 0)
+            pb(a, b);
         else
-        {
-            ra(a);  // Rotation de A si le bit est 1
-        }
-        i++;  // Passe à l'élément suivant
-    }
-    // Remonter les éléments de B vers A
-    while (b->size > 0)
-    {
-        pa(a, b);  // Pousser un élément de B vers A
+            ra(a);
+        i++;
     }
 }
 
 void radix_sort(t_stack *a, t_stack *b)
 {
-    int bits = get_max_bits(a);  // Trouver le nombre de bits du plus grand élément
-    for (int i = 0; i < bits; i++)  // Faire un passage pour chaque bit
+    int bit;
+    int offset;
+
+    if (a->size == 3)
     {
-        radix_sort_pass(a, b, i);  // Appeler la fonction de tri pour chaque bit
+        sort_three_elements(a);
+        return;
     }
+
+    if (a->size <= 5)
+    {
+        sort_four_to_five_elements(a, b);
+        return;
+    }
+
+    offset = find_min(a);
+    if (offset < 0)
+        normalize_stack(a, offset);
+
+    bit = 0;
+    while (!is_array_sorted(a))
+    {
+        optimized_rotate(a, b, bit);
+        while (b->size > 0)
+            pa(a, b);
+        bit++;
+    }
+
+    if (offset < 0)
+        restore_stack(a, offset);
 }
