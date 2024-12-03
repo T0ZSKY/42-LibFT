@@ -6,7 +6,7 @@
 /*   By: tomlimon <tomlimon@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 13:39:23 by tomlimon          #+#    #+#             */
-/*   Updated: 2024/12/02 01:11:39 by tomlimon         ###   ########.fr       */
+/*   Updated: 2024/12/03 14:24:53 by tomlimon         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,18 @@ int	verif_double(t_stack *stack);
 //--------------------------algo------------------------//
 
 void radix_sort(t_stack *a, t_stack *b);
+void sort_three_elements(t_stack *a);
+void sort_four_to_five_elements(t_stack *a, t_stack *b);
+void radix_sort(t_stack *a, t_stack *b);
+void assign_sorted_indices(t_stack *a);
+int find_index(t_stack *a, int value);
+void bring_to_top(t_stack *a, int index);
+void move_elements_by_bit(t_stack *a, t_stack *b, int bit);
+int get_max_bits(t_stack *a);
+
+
+//--------------------------utils------------------------//
+
 int	ft_is_number(char **argv);
 int ft_verif_limite(char **argv);
 void handle_single_argument(char *arg, t_stack **a);
